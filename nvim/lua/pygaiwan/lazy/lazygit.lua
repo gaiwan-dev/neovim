@@ -1,9 +1,11 @@
 return {
-    
-    "kdheepak/lazygit.nvim",  
-	cmd = { "LazyGit", "LazyGitConfig", "LazyGitCurrentFile", "LazyGitFilter", "LazyGitFilterCurrentFile"},
-	
-    config = function()
-        vim.keymap.set('n', '<leader>lg', "<cmd>LazyGit<cr>", {desc = "LazyGit"})
-    end
+
+    "kdheepak/lazygit.nvim",
+    cmd = { "LazyGit", "LazyGitConfig", "LazyGitCurrentFile", "LazyGitFilter", "LazyGitFilterCurrentFile" },
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    keys = {
+        { '<leader>lg', "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    }
 }
