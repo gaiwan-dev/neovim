@@ -23,3 +23,5 @@ vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<leader>y", "\"+y")
 vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
+
+vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end)
