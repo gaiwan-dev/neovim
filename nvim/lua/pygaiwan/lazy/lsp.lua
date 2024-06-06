@@ -64,6 +64,14 @@ return {
 
                             } } }
                         })
+                    elseif server_name == 'lua_ls' then
+                        require('lspconfig').lua_ls.setup({
+                            settings = { Lua = {  diagnostics = {
+                                globals = { 'vim', 'describe', 'it' },
+                            },
+                            workspace = { library = vim.api.nvim_get_runtime_file("", true),},
+                            telemetry = { enable = false, },
+                        }}})
                     else
                         require('lspconfig')[server_name].setup({})
                     end
