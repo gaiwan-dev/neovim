@@ -30,14 +30,43 @@ return {
             sign_icons = {}
         })
 
-        require('mason').setup({})
+        require('mason').setup({
+            PATH = "append"
+        })
         require('mason-lspconfig').setup({
-            -- Replace the language servers listed here
-            -- with the ones you want to install
-            ensure_installed = { 'ruff', 'lua_ls', 'pylsp' },
+            ensure_installed = { 'lua_ls', 'ruff', 'pylsp' },
             handlers = {
                 function(server_name)
-                    require('lspconfig')[server_name].setup({})
+                    if server_name == 'ruff' then
+                        require('lspconfig').ruff_lsp.setup({
+                            init_options = {
+                                settings = {
+                                    format = {
+                                        args = { "--config=" .. vim.loop.os_homedir() .. '/.config/ruff/ruff.toml' }
+                                    },
+                                    lint = {
+                                        args = { "--config=" .. vim.loop.os_homedir() .. '/.config/ruff/ruff.toml' }
+                                    }
+
+                                }
+                            }
+                        })
+                    elseif server_name == 'pylsp' then
+                        require('lspconfig').pylsp.setup({
+                            settings = { pylsp = { plugins = { 
+                                flake8 = { enabled = false },
+                                flakes = { enabled = false },
+                                pylint = { enabled = false },
+                                pycodestyle = { enabled = false },
+                                pydocstyle = { enabled = false },
+                                mccabe = { enabled = false },
+                                autopep8 = { enabled = false },
+
+                            } } }
+                        })
+                    else
+                        require('lspconfig')[server_name].setup({})
+                    end
                 end,
             }
         })
@@ -64,14 +93,6 @@ return {
                 map("K", vim.lsp.buf.hover, "Hover Documentation")
                 map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
             end,
-        })
-
-        require("lspconfig").ruff_lsp.setup({
-            init_options = {
-                settings = {
-                    args = {},
-                },
-            },
         })
     end
 }
