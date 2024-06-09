@@ -38,16 +38,22 @@ return {
             handlers = {
                 function(server_name)
                     if server_name == 'ruff' then
+                        local ruff_config_path = vim.loop.os_homedir() .. '/.config/ruff/ruff.toml'
+                        local project_ruff_config = vim.loop.cwd() .. '/ruff.toml'
+                        local f = io.open(project_ruff_config, 'r')
+                        if f ~= nil then 
+                            io.close(f)
+                            ruff_config_path = project_ruff_config
+                        end
                         require('lspconfig').ruff_lsp.setup({
                             init_options = {
                                 settings = {
                                     format = {
-                                        args = { "--config=" .. vim.loop.os_homedir() .. '/.config/ruff/ruff.toml' }
+                                        args = { "--config=" .. ruff_config_path }
                                     },
                                     lint = {
-                                        args = { "--config=" .. vim.loop.os_homedir() .. '/.config/ruff/ruff.toml' }
+                                        args = { "--config=" .. ruff_config_path }
                                     }
-
                                 }
                             }
                         })
@@ -55,6 +61,7 @@ return {
                         require('lspconfig').pylsp.setup({
                             settings = { pylsp = { plugins = { 
                                 flake8 = { enabled = false },
+                                yapf = { enabled = false },
                                 flakes = { enabled = false },
                                 pylint = { enabled = false },
                                 pycodestyle = { enabled = false },

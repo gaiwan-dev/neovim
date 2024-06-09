@@ -26,3 +26,4 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end)
 vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end)
+
