@@ -22,8 +22,9 @@ return {
         local cmp_mappings = lsp.defaults.cmp_mappings({
             ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
             ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-            ['<C-y>'] = cmp.mapping.confirm({ select = true }),
             ['<C-space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.abort(),
+            ['<CR>'] = cmp.mapping.confirm({ select = true })
         })
 
         lsp.set_preferences({
@@ -41,7 +42,7 @@ return {
                         local ruff_config_path = vim.loop.os_homedir() .. '/.config/ruff/ruff.toml'
                         local project_ruff_config = vim.loop.cwd() .. '/ruff.toml'
                         local f = io.open(project_ruff_config, 'r')
-                        if f ~= nil then 
+                        if f ~= nil then
                             io.close(f)
                             ruff_config_path = project_ruff_config
                         end
@@ -59,26 +60,34 @@ return {
                         })
                     elseif server_name == 'pylsp' then
                         require('lspconfig').pylsp.setup({
-                            settings = { pylsp = { plugins = { 
-                                flake8 = { enabled = false },
-                                yapf = { enabled = false },
-                                flakes = { enabled = false },
-                                pylint = { enabled = false },
-                                pycodestyle = { enabled = false },
-                                pydocstyle = { enabled = false },
-                                mccabe = { enabled = false },
-                                autopep8 = { enabled = false },
+                            settings = {
+                                pylsp = {
+                                    plugins = {
+                                        flake8 = { enabled = false },
+                                        yapf = { enabled = false },
+                                        flakes = { enabled = false },
+                                        pylint = { enabled = false },
+                                        pycodestyle = { enabled = false },
+                                        pydocstyle = { enabled = false },
+                                        mccabe = { enabled = false },
+                                        autopep8 = { enabled = false },
 
-                            } } }
+                                    }
+                                }
+                            }
                         })
                     elseif server_name == 'lua_ls' then
                         require('lspconfig').lua_ls.setup({
-                            settings = { Lua = {  diagnostics = {
-                                globals = { 'vim', 'describe', 'it' },
-                            },
-                            workspace = { library = vim.api.nvim_get_runtime_file("", true),},
-                            telemetry = { enable = false, },
-                        }}})
+                            settings = {
+                                Lua = {
+                                    diagnostics = {
+                                        globals = { 'vim', 'describe', 'it' },
+                                    },
+                                    workspace = { library = vim.api.nvim_get_runtime_file("", true), },
+                                    telemetry = { enable = false, },
+                                }
+                            }
+                        })
                     else
                         require('lspconfig')[server_name].setup({})
                     end
