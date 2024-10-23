@@ -15,3 +15,4 @@ require("lazy").setup({
     spec = "pygaiwan.lazy",
     change_detection = { notify = false }
 })
+require("mason").setup()

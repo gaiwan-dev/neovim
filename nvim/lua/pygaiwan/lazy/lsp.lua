@@ -11,24 +11,24 @@ return {
     },
 
     config = function()
-        local lsp = require('lsp-zero')
-
-        lsp.extend_lspconfig()
-        lsp.preset('recommended')
-
+        local lsp_zero = require('lsp-zero')
         local cmp = require('cmp')
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-        local cmp_mappings = lsp.defaults.cmp_mappings({
-            ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-            ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-            ['<C-space>'] = cmp.mapping.complete(),
-            ['<C-e>'] = cmp.mapping.abort(),
-            ['<CR>'] = cmp.mapping.confirm({ select = true })
-        })
-
-        lsp.set_preferences({
-            sign_icons = {}
+        cmp.setup({
+            sources = { { name = 'nvim_lsp' } },
+            snippet = {
+                expand = function(args)
+                    require('luasnip').lsp_extend(args.body)
+                end,
+            },
+            mapping = cmp.mapping.preset.insert({
+                ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+                ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+                ['<C-space>'] = cmp.mapping.complete(),
+                ['<C-e>'] = cmp.mapping.abort(),
+                ['<CR>'] = cmp.mapping.confirm({ select = true })
+            }),
         })
 
         require('mason').setup({
