@@ -35,7 +35,7 @@ return {
             PATH = "append"
         })
         require('mason-lspconfig').setup({
-            ensure_installed = { 'lua_ls', 'ruff', 'pylsp' },
+            ensure_installed = { 'lua_ls', 'ruff', 'pyright' },
             handlers = {
                 function(server_name)
                     if server_name == 'ruff' then
@@ -58,21 +58,11 @@ return {
                                 }
                             }
                         })
-                    elseif server_name == 'pylsp' then
-                        require('lspconfig').pylsp.setup({
+                    elseif server_name == 'pyright' then
+                        require('lspconfig').pyright.setup({
                             settings = {
-                                pylsp = {
-                                    plugins = {
-                                        flake8 = { enabled = false },
-                                        yapf = { enabled = false },
-                                        flakes = { enabled = false },
-                                        pylint = { enabled = false },
-                                        pycodestyle = { enabled = false },
-                                        pydocstyle = { enabled = false },
-                                        mccabe = { enabled = false },
-                                        autopep8 = { enabled = false },
-
-                                    }
+                                pyright = {
+                                    
                                 }
                             }
                         })
