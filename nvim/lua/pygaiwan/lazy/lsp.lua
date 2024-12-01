@@ -35,7 +35,7 @@ return {
             PATH = "append"
         })
         require('mason-lspconfig').setup({
-            ensure_installed = { 'lua_ls', 'ruff_lsp', 'pyright', 'biome', 'ts_ls' },
+            ensure_installed = { 'lua_ls','pyright', 'biome', 'ts_ls' },
             handlers = {
                 function(server_name)
                     if server_name == 'ruff' then
@@ -47,7 +47,7 @@ return {
                             ruff_config_path = project_ruff_config
                             print(ruff_config_path)
                         end
-                        require('lspconfig').ruff_lsp.setup({
+                        require('lspconfig').ruff.setup({
                             init_options = {
                                 settings = {
                                     format = {
