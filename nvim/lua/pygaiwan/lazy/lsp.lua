@@ -35,7 +35,7 @@ return {
             PATH = "append"
         })
         require('mason-lspconfig').setup({
-            ensure_installed = { 'lua_ls','pyright', 'biome', 'ts_ls' },
+            ensure_installed = { 'lua_ls', 'ruff', 'pyright', 'biome', 'ts_ls', 'asm_lsp' },
             handlers = {
                 function(server_name)
                     if server_name == 'ruff' then
@@ -76,6 +76,14 @@ return {
                         })
                     elseif server_name == 'ts_ls' then
                         require('lspconfig').ts_ls.setup({})
+                    elseif server_name == 'asm_lsp' then
+                        -- the code has to be in a git directory 
+                        require('lspconfig').asm_lsp.setup({
+                            command = "asm-lsp",
+                            filetypes = {
+                                "asm", "s", "S"
+                            }
+                        })
                     else
                         require('lspconfig')[server_name].setup({})
                     end
