@@ -1,6 +1,5 @@
 ENSURE_INSTALLED = { "lua_ls", "pyright", "ts_ls", "biome", "asm_lsp" }
 
--- TODO: review the dependencies
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -9,7 +8,6 @@ return {
         "VonHeikemen/lsp-zero.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/nvim-cmp",
-        -- "L3MON4D3/LuaSnip",
     },
 
     config = function()
@@ -22,12 +20,9 @@ return {
             vim.lsp.protocol.make_client_capabilities(),
             cmp_lsp.default_capabilities()
         )
-
         cmp.setup({
             sources = { { name = "nvim_lsp" } },
-            snippet = {
-                expand = function(args) vim.snippet.expand(args.body) end,
-            },
+            snippet = { expand = function(args) vim.snippet.expand(args.body) end, },
             mapping = cmp.mapping.preset.insert({
                 ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
                 ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
@@ -49,6 +44,8 @@ return {
                         capabilities = capabilities,
                     })
                 end,
+                -- Every LSP that needs a specific config needs to have a file in lspconfig/config
+                -- and it is required to get the config from the file and perform the setup.
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     local config = require("pygaiwan.lazy.languages.lspconfig.configs.lua_ls")
