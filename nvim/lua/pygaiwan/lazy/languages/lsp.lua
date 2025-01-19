@@ -46,26 +46,12 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = ENSURE_INSTALLED,
             handlers = {
-                -- TODO: not sure what this is for
+                -- This is for setting up servers that are not in the ENSURE_INSTALLED list
                 function(server_name)
                     require("lspconfig")[server_name].setup({
                         capabilities = capabilities,
                     })
                 end,
-                -- TODO: review if it can be generalized
-                -- function()
-                --     local lspconfig = require("lspconfig")
-                --     for _, server in ipairs(ENSURE_INSTALLED) do
-                --         local ok, config = pcall(require, "pygaiwan.lazy.lspconfig.config." .. server)
-                --         if ok then
-                --             config.capabilities = capabilities
-                --             lspconfig[server].setup(config)
-                --        else
-                --             vim.notify("No config found for " .. server, vim.log.levels.INFO)
-                --        end
-                --     end
-                -- end,
-                --
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
                     local config = require("pygaiwan.lazy.languages.lspconfig.configs.lua_ls")
@@ -78,8 +64,7 @@ return {
                     config.capabilities = capabilities
                     lspconfig.ts_ls.setup(config)
                 end,
-
-            },
+            }
         })
 
         vim.api.nvim_create_autocmd("LspAttach", {
