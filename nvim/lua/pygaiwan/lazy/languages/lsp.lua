@@ -9,7 +9,7 @@ return {
         "VonHeikemen/lsp-zero.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/nvim-cmp",
-        "L3MON4D3/LuaSnip",
+        -- "L3MON4D3/LuaSnip",
     },
 
     config = function()
@@ -25,11 +25,8 @@ return {
 
         cmp.setup({
             sources = { { name = "nvim_lsp" } },
-            -- TODO: review why this crashes in Lua code
             snippet = {
-                expand = function(args)
-                    require("luasnip").lsp_extend(args.body)
-                end,
+                expand = function(args) vim.snippet.expand(args.body) end,
             },
             mapping = cmp.mapping.preset.insert({
                 ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
