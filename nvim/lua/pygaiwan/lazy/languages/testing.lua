@@ -2,6 +2,8 @@ return {
     "nvim-neotest/neotest",
     dependencies = {
         "nvim-neotest/neotest-python",
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-lua/plenary.nvim",
     },
     config = function()
         local neotest = require("neotest")
@@ -11,7 +13,7 @@ return {
                     dap = { justMyCode = false },
                     args = { "--log-level", "DEBUG" },
                     runner = "pytest",
-                    python = ".venv/bin/python",
+                    python = require('venv-selector').get_active_path,
                     pytest_discover_instances = true,
                     is_test_file = function(file_path)
                         local filename = vim.fn.fnamemodify(file_path, ":t")
