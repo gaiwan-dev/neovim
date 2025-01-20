@@ -16,6 +16,7 @@ require("lazy").setup({
         { import = "pygaiwan.lazy.ui" },
         { import = "pygaiwan.lazy.vim_utils" },
         { import = "pygaiwan.lazy.languages" },
+        { import = "pygaiwan.lazy.languages.python" },
     },
     change_detection = { notify = false }
 })
