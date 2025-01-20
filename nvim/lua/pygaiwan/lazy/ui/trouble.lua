@@ -13,5 +13,10 @@ return {
             "<cmd>Trouble symbols toggle focus=false<cr>",
             desc = "Symbols (Trouble)",
         },
+        {
+            "<leader>xt",
+            "<cmd>Trouble todo toggle focus=false<cr>",
+            desc = "Todo list (Troble)",
+        },
    },
 }
