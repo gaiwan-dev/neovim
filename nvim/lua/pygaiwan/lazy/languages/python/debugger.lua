@@ -3,25 +3,19 @@ return {
     config = function()
         local dap = require('dap')
 
-        local function get_venv()
-            local venv_path = os.getenv('VIRTUAL_ENV')
-            if venv_path then venv_path = venv_path .. '/bin/python' else venv_path = '/usr/local/bin/python3' end
-            return venv_path
-        end
-        -- Python adapter setup
+       -- Python adapter setup
         dap.adapters.python = {
             type = 'executable',
             command = 'python',
             args = { '-m', 'debugpy.adapter' },
         }
-
+        -- python path not needed thanks to venv-selector
         dap.configurations.python = {
             {
                 type = 'python',
                 request = 'launch',
                 name = "Launch file",
                 program = "${file}",
-                pythonPath = get_venv()
             },
         }
 
