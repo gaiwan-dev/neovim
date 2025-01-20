@@ -58,6 +58,12 @@ return {
                     config.capabilities = capabilities
                     lspconfig.ts_ls.setup(config)
                 end,
+                ["pyright"] = function()
+                    local lspconfig = require("lspconfig")
+                    local config = require("pygaiwan.lazy.languages.lspconfig.configs.pyright")
+                    config.capabilities = capabilities
+                    lspconfig.pyright.setup(config)
+                end,
             }
         })
 
