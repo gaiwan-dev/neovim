@@ -1,12 +1,9 @@
-local get_lint_config_path = require("pygaiwan.linters").get_lint_config_path
+local utils = require("pygaiwan.lazy.languages.lspconfig.utils")
 
 return {
     "stevearc/conform.nvim",
     -- event = { "BufWritePre" },
     cmd = { "ConformInfo" },
-    -- This will provide type hinting with LuaLS
-    ---@module "conform"
-    ---@type conform.setupOpts
     opts = {
         formatters_by_ft = {
             lua = { "stylua" },
@@ -23,13 +20,13 @@ return {
         formatters = {
             shfmt = {
                 prepend_args = { "-i", "2" },
-                
+
             },
             ruff = {
                 prepend_args = {
                     "--config",
                     function()
-                        return get_lint_config_path("ruff", "toml")
+                        return utils.get_lint_config_path("ruff", "toml")
                     end,
                     "format",
                 },
@@ -39,7 +36,7 @@ return {
                     "format",
                     "--config-path ",
                     function()
-                        return get_lint_config_path("biome", "json")
+                        return utils.get_lint_config_path("biome", "json")
                     end,
                 },
             },

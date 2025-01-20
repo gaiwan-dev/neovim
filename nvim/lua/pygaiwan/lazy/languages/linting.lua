@@ -1,4 +1,5 @@
-local get_config_path = require("pygaiwan.linters").get_lint_config_path
+local utils = require("pygaiwan.lazy.languages.lspconfig.utils")
+
 return {
 	"mfussenegger/nvim-lint",
 	event = {
@@ -19,7 +20,7 @@ return {
 		ruff.args = {
 			"--config",
 			function()
-				get_config_path("ruff", "toml")
+				utils.get_lint_config_path("ruff", "toml")
 			end,
 			"check",
 		}
@@ -29,7 +30,7 @@ return {
 			"check",
 			"--config-path ",
 			function()
-				get_config_path("biome", "json")
+				utils.get_lint_config_path("biome", "json")
 			end,
 		}
 

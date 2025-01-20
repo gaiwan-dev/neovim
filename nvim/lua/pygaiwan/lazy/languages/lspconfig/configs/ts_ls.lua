@@ -1,4 +1,4 @@
-local get_lint_config_path = require("pygaiwan.linters").get_lint_config_path
+local utils = require("pygaiwan.lazy.languages.lspconfig.utils")
 
 return {
     default_config = {
@@ -12,7 +12,7 @@ return {
             'typescriptreact',
             'typescript.tsx',
         },
-        root_dir = get_lint_config_path('tsconfig', 'json'),
+        root_dir = utils.get_lint_config_path('tsconfig', 'json'),
         single_file_support = true,
     },
 }

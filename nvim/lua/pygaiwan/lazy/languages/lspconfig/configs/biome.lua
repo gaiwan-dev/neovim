@@ -1,5 +1,6 @@
 local get_lint_config_path = require("pygaiwan.linters").get_lint_config_path
 
+
 return {
 	capabilities = capabilities,
 	default_config = {

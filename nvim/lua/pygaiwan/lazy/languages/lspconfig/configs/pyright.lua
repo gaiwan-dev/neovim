@@ -14,7 +14,6 @@ return {
             analysis = {
                 ignore = { '*' }, -- Use ruff for linting, exluding all.
                 autoImportCompletions = true,
-                
             },
         },
     },

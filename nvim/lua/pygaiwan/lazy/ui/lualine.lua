@@ -1,3 +1,5 @@
+local utils = require("pygaiwan.lazy.languages.lspconfig.utils")
+
 return {
     "nvim-lualine/lualine.nvim",
     dependencies = {
@@ -114,10 +116,24 @@ return {
         insert_left {
             "diff"
         }
+
         insert_left {
             "branch",
             icon = "",
             color = { fg = colors.blue, gui = "bold" },
+        }
+
+        insert_left {
+            function()
+                local ft = vim.bo.filetype
+                if ft == "python" then
+                    return "Config: " .. utils.get_lint_config_path("ruff", "toml")
+                elseif ft == "javascript" or ft == "typescript" then
+                    return "Config: " .. utils.get_lint_config_path("biome", "json")
+                end
+                return ""
+            end,
+            icon = " ",
         }
 
         insert_right {
@@ -146,7 +162,7 @@ return {
             end,
 
             icon = " LSP:",
-            color = { fg = "#ffffff", gui = "bold" },
+            color = { gui = "bold" },
         }
 
         insert_right {
