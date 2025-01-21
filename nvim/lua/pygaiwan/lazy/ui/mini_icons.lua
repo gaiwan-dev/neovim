@@ -1,1 +1,2 @@
-return { 'echasnovski/mini.icons', version = '*' }
+-- fancy icons
+return { "echasnovski/mini.icons", version = "*" }

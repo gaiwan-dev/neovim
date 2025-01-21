@@ -69,6 +69,12 @@ return {
 			},
 		})
 
+		-- create the Code group in wk
+		local wk = require("which-key")
+		wk.add({
+			{ "<leader>c", group = "Code" },
+		})
+
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(event)
 				local map = function(key, func, desc)
@@ -80,11 +86,8 @@ return {
 				map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 				map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
-				-- map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-				-- map("<leader>cf", vim.lsp.buf.format, "[C]ode [F]ormat")
-				map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-				map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-				map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+				map("<leader>cD", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 				map("<F2>", vim.lsp.buf.rename, "Rename symbol")
 			end,
 		})
