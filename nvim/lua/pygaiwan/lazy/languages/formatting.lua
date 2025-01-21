@@ -4,45 +4,63 @@ local utils = require("pygaiwan.lazy.languages.lspconfig.utils")
 
 return {
 	"stevearc/conform.nvim",
-	event = { "BufWritePre" },
+	event = { "BufReadPre", "BufNewFile" },
 	cmd = { "ConformInfo" },
-	opts = {
-		formatters_by_ft = {
-			lua = { "stylua" },
-			python = { "ruff" },
-			javascript = { "biome" },
-		},
-		-- Set default options
-		default_format_opts = {
-			lsp_format = "fallback",
-		},
-		-- Set up format-on-save
-		format_on_save = { timeout_ms = 500 },
-		-- Customize formatters
-		formatters = {
-			shfmt = {
-				prepend_args = { "-i", "2" },
+
+	config = function()
+		local conform = require("conform")
+
+		conform.setup({
+			formatters_by_ft = {
+				javascript = { "biome" },
+				typescript = { "biome" },
+				javascriptreact = { "biome" },
+				typescriptreact = { "biome" },
+				svelte = { "biome" },
+				css = { "biome" },
+				html = { "biome" },
+				json = { "biome" },
+				yaml = { "biome" },
+				lua = { "stylua" },
+				python = { "ruff" },
 			},
-			ruff = {
-				args = {
-					"format",
-					"--stdin-filename",
-					"$FILENAME",
-					"--config",
-					utils.get_lint_config_path("ruff", "toml"),
+			format_on_save = {
+				-- will fallback to lsp formatting if conform cannot do it
+				lsp_fallback = true,
+				async = false,
+				timeout_ms = 500,
+			},
+			-- Customize formatters
+			formatters = {
+				ruff = {
+					args = {
+						"format",
+						"--stdin-filename",
+						"$FILENAME",
+						"--config",
+						utils.get_lint_config_path("ruff", "toml"),
+					},
+					stdin = true,
 				},
-				stdin = true,
-			},
-			biome = {
-				args = {
-					"format",
-					"--stdin-file-path",
-					"$FILENAME",
-					"--config-path",
-					utils.get_lint_config_path("biome", "josn", true),
+				biome = {
+					args = {
+						"format",
+						"--stdin-file-path",
+						"$FILENAME",
+						"--config-path",
+						utils.get_lint_config_path("biome", "josn", true),
+					},
+					stdin = true,
 				},
-				stdin = true,
 			},
-		},
-	},
+		})
+
+		vim.keymap.set({ "n", "v" }, "<leader>cf", function()
+			conform.format({
+				lsp_fallback = true,
+				async = false,
+				timeout_ms = 500,
+			})
+		end, { desc = "[C]ode [F]ormat" })
+	end,
 }

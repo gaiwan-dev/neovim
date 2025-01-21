@@ -23,12 +23,5 @@ vim.keymap.set("n", "<leader>y", '"+y', { desc = "Save to computer clipboard" })
 vim.keymap.set("v", "<leader>y", '"+y', { desc = "Save selected lines to computer clipboard" })
 vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Save current line to computer clipboard" })
 
-vim.keymap.set("n", "<leader>cf", function()
-	vim.lsp.buf.format({ async = true })
-end, { desc = "[C]ode [F]ormat" })
-vim.keymap.set("n", "<leader>ca", function()
-	vim.lsp.buf.code_action()
-end, { desc = "[C]ode [A]ction" })
-
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "q", "<nop>")

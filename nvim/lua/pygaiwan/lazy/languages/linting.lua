@@ -19,22 +19,22 @@ return {
 		}
 		local ruff = lint.linters.ruff
 		ruff.args = {
+			"check",
+			"--stdin-filename",
+			"$FILENAME",
 			"--config",
-			function()
-				utils.get_lint_config_path("ruff", "toml")
-			end,
-			"check",
+			utils.get_lint_config_path("ruff", "toml"),
 		}
 
-		local biome = lint.linters.biomejs
-		biome.args = {
-			"check",
-			"--config-path ",
-			function()
-				utils.get_lint_config_path("biome", "json")
-			end,
-		}
-
+		-- local biome = lint.linters.biomejs
+		-- biome.args = {
+		-- 	"lint",
+		-- 	"--stdin-file-path",
+		-- 	"$FILENAME",
+		-- 	"--config-path ",
+		-- 	utils.get_lint_config_path("biome", "json", true),
+		-- }
+		--
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
@@ -45,7 +45,8 @@ return {
 		})
 
 		vim.keymap.set("n", "<leader>cl", function()
+			vim.notify("ovo")
 			lint.try_lint()
-		end, { desc = "Trigger linting for current file" })
+		end, { desc = "[C]ode [L]inting" })
 	end,
 }
