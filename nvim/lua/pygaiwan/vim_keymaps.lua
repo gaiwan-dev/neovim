@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>ex", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>ex", vim.cmd.Ex, { desc = "Open file explorer" })
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
@@ -14,21 +14,21 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Move blocks highlighted up (K) or down (J)
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move highlighted block down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move highlighted block up" })
 
-vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Concatenate the below line up" })
 
+vim.keymap.set("n", "<leader>y", '"+y', { desc = "Save to computer clipboard" })
+vim.keymap.set("v", "<leader>y", '"+y', { desc = "Save selected lines to computer clipboard" })
+vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Save current line to computer clipboard" })
 
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
-
-vim.keymap.set('n', '<leader>cf', function() vim.lsp.buf.format { async = true } end)
-vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end)
+vim.keymap.set("n", "<leader>cf", function()
+	vim.lsp.buf.format({ async = true })
+end, { desc = "[C]ode [F]ormat" })
+vim.keymap.set("n", "<leader>ca", function()
+	vim.lsp.buf.code_action()
+end, { desc = "[C]ode [A]ction" })
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "q", "<nop>")
-
-vim.keymap.set("n", "<C-t>", "<CMD>NvimTreeToggle<CR>", { desc = "Toggle Tree explorer" })
-
