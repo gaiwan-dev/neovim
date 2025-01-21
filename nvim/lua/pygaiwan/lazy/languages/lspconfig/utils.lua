@@ -299,25 +299,39 @@ function M.strip_archive_subpath(path)
 	return path
 end
 
-
 -- Function to determine linter/formatter config
 -- it is assumed that that nvim is always started from the root of the project.
--- At some point i might want to generalize it more for different folders.
+-- At some point i might want to generalize it more for different tools.
 -- @param tool string
 -- @param extension string
-function M.get_lint_config_path(tool, extension)
+-- @param path_only boolean?
+function M.get_lint_config_path(tool, extension, path_only)
 	-- Default to home config
-	local generic_config = vim.loop.os_homedir() .. "/.config/" .. tool .. "/" .. tool .. "." .. extension
-	local project_config = vim.loop.cwd() .. "/" .. tool .. "." .. extension
+	local generic_config_path = vim.loop.os_homedir() .. "/.config/" .. tool .. "/"
+	local project_config_path = vim.loop.cwd() .. "/"
+	local generic_config_file = generic_config_path .. tool .. "." .. extension
+	local project_config_file = project_config_path .. tool .. "." .. extension
+	local project_file_present = false
 
-	-- Check if config file  exists in the current project
-	local f = io.open(project_config, "r")
+	-- Check if config file exists in the current project
+	local f = io.open(project_config_file, "r")
 	if f ~= nil then
-		io.close(f)
-		generic_config = project_config
+		f:close()
+		project_file_present = true
 	end
 
-	return generic_config
+	if project_file_present and not path_only then
+		return project_config_file
+	end
+	if project_file_present and path_only then
+		return project_config_path
+	end
+	if not project_file_present and not path_only then
+		return generic_config_file
+	end
+	if not project_file_present and path_only then
+		return generic_config_path
+	end
 end
 
 -- Create a user command that, when run, shows the path in a notification
