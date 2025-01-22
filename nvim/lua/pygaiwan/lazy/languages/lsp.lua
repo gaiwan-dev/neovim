@@ -88,7 +88,7 @@ return {
 				map("K", vim.lsp.buf.hover, "Hover Documentation")
 				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 				map("<leader>cD", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-				map("<F2>", vim.lsp.buf.rename, "Rename symbol")
+				map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
 			end,
 		})
 	end,
