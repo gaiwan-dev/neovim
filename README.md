@@ -1,6 +1,10 @@
-Structure:
+# Pygaiwan Configuration
 
-```
+This repository provides a modular and extensible Neovim configuration using Lazy.nvim and other plugins. Below is the structure of the configuration and the details of the plugins used.
+
+## File Structure
+
+```plaintext
 ❯ tree
 .
 ├── init.lua
@@ -44,59 +48,66 @@ Structure:
         ├── lazy_init.lua
         ├── vim_keymaps.lua
         └── vim_options.lua
-
 ```
 
-The `pygaiwan.init` loads all the non-Lazy configurations, while `pygaiwan.lazy_init` inialize Lazy plugins.
-Inside `pygaiwan.lazy_init` there is a import for each module:
+## Configuration Overview
 
-- `ui` -> for plugins that change or imporve the Neovim UI
-- `vim_utils` -> for plugins that enhance the Neovim functionalities
-- `languages` -> for plugins that are language generic
-- `languages.python` -> for plugins that are python specific.
+### Initialization
 
-The following are the plugins used:
+- **`pygaiwan.init`**: Loads all the non-Lazy configurations.
+- **`pygaiwan.lazy_init`**: Initializes Lazy.nvim plugins and imports the following modules:
+  - **`ui`**: Plugins that change or improve the Neovim UI.
+  - **`vim_utils`**: Plugins that enhance Neovim functionality.
+  - **`languages`**: Plugins for language-generic features.
+  - **`languages.python`**: Plugins specific to Python.
 
-- mason
-- lazyvim
+### Plugin Details
 
+#### Plugin Manager
+- [**mason.nvim**](https://github.com/williamboman/mason.nvim): For LSP and DAP management.
+- [**lazy.nvim**](https://github.com/folke/lazy.nvim): As the plugin manager.
 
-`ui`:
-- `indentscope`: https://github.com/echasnovski/mini.indentscope to provide bar over indentation blocks
-- `which-key`: https://github.com/folke/which-key.nvim to provide key helpers toolbar
-- `lualine`: https://github.com/nvim-lualine/lualine.nvim for customization of the lower bar of Neovim
-- `mini-icons`: https://github.com/echasnovski/mini.icons to render icons/emoji
-- `nord`: https://github.com/shaunsingh/nord.nvim as theme
-- `todo-comments`: https://github.com/folke/todo-comments.nvim for highlighing keyword like "TODO"
-- `trouble`: https://github.com/folke/trouble.nvim for diagnostic and references listing
+#### `ui` Plugins
+- [**mini.indentscope**](https://github.com/echasnovski/mini.indentscope): Provides a visual bar for indentation blocks.
+- [**which-key.nvim**](https://github.com/folke/which-key.nvim): Displays keybinding helpers.
+- [**lualine.nvim**](https://github.com/nvim-lualine/lualine.nvim): Customizes the status line.
+- [**mini.icons**](https://github.com/echasnovski/mini.icons): Renders icons and emojis.
+- [**nord.nvim**](https://github.com/shaunsingh/nord.nvim): Provides the Nord theme.
+- [**todo-comments.nvim**](https://github.com/folke/todo-comments.nvim): Highlights keywords like `TODO`.
+- [**trouble.nvim**](https://github.com/folke/trouble.nvim): For diagnostics and references listing.
 
-`vim_utils`:
-- `gitdiff`: https://github.com/sindrets/diffview.nvim for easy Git diff and merge management
-- `harpoon`: https://github.com/ThePrimeagen/harpoon/ for fast file movement
-- `lazygit`: https://github.com/kdheepak/lazygit.nvim for easy access to LazyGit UI
-- `telescope`: https://github.com/nvim-telescope/telescope.nvim fuzzy finding utility
-- `zenmode`: https://github.com/folke/zen-mode.nvim for Zen Mode interface
+#### `vim_utils` Plugins
+- [**diffview.nvim**](https://github.com/sindrets/diffview.nvim): For Git diff and merge management.
+- [**harpoon**](https://github.com/ThePrimeagen/harpoon): For quick file movement.
+- [**lazygit.nvim**](https://github.com/kdheepak/lazygit.nvim): Provides an interface for LazyGit.
+- [**telescope.nvim**](https://github.com/nvim-telescope/telescope.nvim): Fuzzy finding utility.
+- [**zen-mode.nvim**](https://github.com/folke/zen-mode.nvim): Enables Zen Mode.
 
-`language`:
-- `conform`: https://github.com/stevearc/conform.nvim for language formatter management
-- `nvim-lspconfig`: https://github.com/neovim/nvim-lspconfig/ for LSP management
-- `nvim-lint`: https://github.com/mfussenegger/nvim-lint for language linter management
-- `neotest`: https://github.com/nvim-neotest/neotest for testing utility management
-- `treesitter`: https://github.com/nvim-treesitter/nvim-treesitter for graphing language for LSP
+#### `languages` Plugins
+- [**conform.nvim**](https://github.com/stevearc/conform.nvim): Manages language formatters.
+- [**nvim-lspconfig**](https://github.com/neovim/nvim-lspconfig): LSP configuration.
+- [**nvim-lint**](https://github.com/mfussenegger/nvim-lint): Language linting management.
+- [**neotest**](https://github.com/nvim-neotest/neotest): Testing utility management.
+- [**treesitter**](https://github.com/nvim-treesitter/nvim-treesitter): Provides syntax tree-based features.
 
-`python`:
-- `nvim-dap`: https://github.com/mfussenegger/nvim-dap for interaction with python DAP
-- `nvim-dap-ui`: https://github.com/rcarriga/nvim-dap-ui for python DAP UI
-- `venv-selector`: https://github.com/linux-cultist/venv-selector.nvim for venv management
+#### `python` Plugins
+- [**nvim-dap**](https://github.com/mfussenegger/nvim-dap): Debug Adapter Protocol (DAP) for Python.
+- [**nvim-dap-ui**](https://github.com/rcarriga/nvim-dap-ui): UI for Python DAP.
+- [**venv-selector.nvim**](https://github.com/linux-cultist/venv-selector.nvim): Virtual environment management.
 
+---
 
-things to do: 
+## Adding Support for a New Language
 
-when adding a new language i need to change: 
+Follow these steps to add support for a new language:
 
-1. treesitter -> add langauge
-2. lsp 
-3. formatter -> formatter_by_ft
-4. linter
-5. debugger (optional)
-6. testing:
+1. Add the language to the `ensure_installed` variable in **`languages.treesitter`**.
+2. Add the language in **`languages.lsp`**.
+3. *(Optional)* If the LSP requires specific configurations, add them in the `handlers` section.
+4. Add the required formatter to `formatters_by_ft` in **`languages.formatting`**.
+5. *(Optional)* Add non-standard formatter configurations in `formatters`. Check [Conform.nvim Formatters](https://github.com/stevearc/conform.nvim/tree/master/lua/conform/formatters) for existing configurations.
+6. Add the linter to `linters_by_ft` in **`languages.linting`**.
+7. *(Optional)* Add non-standard linter configurations if needed. Check [Conform.nvim Formatters](https://github.com/stevearc/conform.nvim/tree/master/lua/conform/formatters) for references.
+8. *(Optional)* If a debugger is available, create a folder for the language and add the debugger plugin. Import the new folder in `lazy_init`.
+9. *(Optional)* Add a testing adapter in **`languages.testing`**, if available.
+

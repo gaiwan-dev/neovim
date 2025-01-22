@@ -1,4 +1,5 @@
--- TODO: review, i think the args might be wrong, see formatter for example.
+-- Linting capabilitis
+
 local utils = require("pygaiwan.lazy.languages.lspconfig.utils")
 
 return {
