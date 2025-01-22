@@ -1,8 +1,8 @@
-# Pygaiwan Configuration
+# Configuration
 
 This repository provides a modular and extensible Neovim configuration using Lazy.nvim and other plugins. Below is the structure of the configuration and the details of the plugins used.
 
-## File Structure
+## 📂 File Structure
 
 ```plaintext
 ❯ tree
@@ -50,9 +50,9 @@ This repository provides a modular and extensible Neovim configuration using Laz
         └── vim_options.lua
 ```
 
-## Configuration Overview
+## 🛠️ Configuration Overview
 
-### Initialization
+### 🚀 Initialization
 
 - **`pygaiwan.init`**: Loads all the non-Lazy configurations.
 - **`pygaiwan.lazy_init`**: Initializes Lazy.nvim plugins and imports the following modules:
@@ -61,13 +61,13 @@ This repository provides a modular and extensible Neovim configuration using Laz
   - **`languages`**: Plugins for language-generic features.
   - **`languages.python`**: Plugins specific to Python.
 
-### Plugin Details
+### 📦 Plugin Details
 
-#### Plugin Manager
+#### 📋 Plugin Manager
 - [**mason.nvim**](https://github.com/williamboman/mason.nvim): For LSP and DAP management.
 - [**lazy.nvim**](https://github.com/folke/lazy.nvim): As the plugin manager.
 
-#### `ui` Plugins
+#### 🎨 `ui` Plugins
 - [**mini.indentscope**](https://github.com/echasnovski/mini.indentscope): Provides a visual bar for indentation blocks.
 - [**which-key.nvim**](https://github.com/folke/which-key.nvim): Displays keybinding helpers.
 - [**lualine.nvim**](https://github.com/nvim-lualine/lualine.nvim): Customizes the status line.
@@ -76,28 +76,28 @@ This repository provides a modular and extensible Neovim configuration using Laz
 - [**todo-comments.nvim**](https://github.com/folke/todo-comments.nvim): Highlights keywords like `TODO`.
 - [**trouble.nvim**](https://github.com/folke/trouble.nvim): For diagnostics and references listing.
 
-#### `vim_utils` Plugins
+#### 🔧 `vim_utils` Plugins
 - [**diffview.nvim**](https://github.com/sindrets/diffview.nvim): For Git diff and merge management.
 - [**harpoon**](https://github.com/ThePrimeagen/harpoon): For quick file movement.
 - [**lazygit.nvim**](https://github.com/kdheepak/lazygit.nvim): Provides an interface for LazyGit.
 - [**telescope.nvim**](https://github.com/nvim-telescope/telescope.nvim): Fuzzy finding utility.
 - [**zen-mode.nvim**](https://github.com/folke/zen-mode.nvim): Enables Zen Mode.
 
-#### `languages` Plugins
+#### 🌐 `languages` Plugins
 - [**conform.nvim**](https://github.com/stevearc/conform.nvim): Manages language formatters.
 - [**nvim-lspconfig**](https://github.com/neovim/nvim-lspconfig): LSP configuration.
 - [**nvim-lint**](https://github.com/mfussenegger/nvim-lint): Language linting management.
 - [**neotest**](https://github.com/nvim-neotest/neotest): Testing utility management.
 - [**treesitter**](https://github.com/nvim-treesitter/nvim-treesitter): Provides syntax tree-based features.
 
-#### `python` Plugins
+#### 🐍 `python` Plugins
 - [**nvim-dap**](https://github.com/mfussenegger/nvim-dap): Debug Adapter Protocol (DAP) for Python.
 - [**nvim-dap-ui**](https://github.com/rcarriga/nvim-dap-ui): UI for Python DAP.
 - [**venv-selector.nvim**](https://github.com/linux-cultist/venv-selector.nvim): Virtual environment management.
 
 ---
 
-## Adding Support for a New Language
+## ✨ Adding Support for a New Language
 
 Follow these steps to add support for a new language:
 
@@ -107,7 +107,7 @@ Follow these steps to add support for a new language:
 4. Add the required formatter to `formatters_by_ft` in **`languages.formatting`**.
 5. *(Optional)* Add non-standard formatter configurations in `formatters`. Check [Conform.nvim Formatters](https://github.com/stevearc/conform.nvim/tree/master/lua/conform/formatters) for existing configurations.
 6. Add the linter to `linters_by_ft` in **`languages.linting`**.
-7. *(Optional)* Add non-standard linter configurations if needed. Check [Conform.nvim Formatters](https://github.com/stevearc/conform.nvim/tree/master/lua/conform/formatters) for references.
+7. *(Optional)* Add non-standard linter configurations if needed. Check [nvim-lint Linters](https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters) for references.
 8. *(Optional)* If a debugger is available, create a folder for the language and add the debugger plugin. Import the new folder in `lazy_init`.
 9. *(Optional)* Add a testing adapter in **`languages.testing`**, if available.
 
