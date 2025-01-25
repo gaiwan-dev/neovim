@@ -5,12 +5,17 @@ return {
 	"nvim-neotest/neotest",
 	dependencies = {
 		"nvim-neotest/neotest-python",
+		"nvim-neotest/neotest-jest", -- this needs corepack (npm install corepack)
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-lua/plenary.nvim",
 	},
 	config = function()
 		local neotest = require("neotest")
 		neotest.setup({
+			-- not too sure about this for now is written in jest config
+			discovery = {
+				enabled = false,
+			},
 			adapters = {
 				require("neotest-python")({
 					dap = { justMyCode = false },
@@ -21,6 +26,13 @@ return {
 						local filename = vim.fn.fnamemodify(file_path, ":t")
 						return filename:match("^test_") or filename:match("_test%.py$")
 					end,
+				}),
+				require("neotest-jest")({
+					jestCommand = "npm test --",
+					cwd = function(path)
+						return vim.fn.getcwd()
+					end,
+					jest_test_discovery = false,
 				}),
 			},
 		})
