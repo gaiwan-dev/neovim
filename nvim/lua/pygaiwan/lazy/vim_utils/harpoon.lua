@@ -4,12 +4,8 @@ return {
 		local mark = require("harpoon.mark")
 		local ui = require("harpoon.ui")
 
-		local wk = require("which-key")
-		wk.add({
-			{ "<leader>a", group = "Harpoon", icon = "" },
-			{ "<leader>aa", mark.add_file, desc = "Add to Harpoon", mode = "n" },
-			{ "<leader>ae", ui.toggle_quick_menu, desc = "Open Harpoon", mode = "n" },
-		})
+		vim.keymap.set("n", "<leader>a", mark.add_file)
+		vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 		vim.keymap.set("n", "<leader>1", function()
 			ui.nav_file(1)
 		end, { desc = "Open file in buffer 1" })
