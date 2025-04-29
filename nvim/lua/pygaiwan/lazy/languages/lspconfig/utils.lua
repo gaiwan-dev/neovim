@@ -335,12 +335,12 @@ function M.get_lint_config_path(tool, extension, path_only)
 end
 
 -- Create a user command that, when run, shows the path in a notification
-vim.api.nvim_create_user_command("ShowRuffPath", function()
+vim.api.nvim_create_user_command("RuffPath", function()
 	local path = M.get_lint_config_path("ruff", "toml")
 	vim.notify("Ruff config path: " .. path, vim.log.levels.INFO)
 end, {})
 
-vim.api.nvim_create_user_command("ShowBiomePath", function()
+vim.api.nvim_create_user_command("BiomePath", function()
 	local path = M.get_lint_config_path("biome", "json")
 	vim.notify("Biome config path: " .. path, vim.log.levels.INFO)
 end, {})
