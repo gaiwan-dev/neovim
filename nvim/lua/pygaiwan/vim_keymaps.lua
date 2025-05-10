@@ -25,3 +25,12 @@ vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Save current line to computer 
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "q", "<nop>")
+
+-- Resize vertical panes
+vim.keymap.set("n", "<A-h>", ":vertical resize -5<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<A-l>", ":vertical resize +5<CR>", { noremap = true, silent = true })
+
+-- Word wrap
+vim.keymap.set("n", "<A-w>", ":set wrap<CR>", { desc = "[W]ord [w]rap" })
+
+vim.keymap.set("n", "<leader>x", "<cmd>! chmod +x %<CR>", { silent = true, desc = "Make file executable" })
