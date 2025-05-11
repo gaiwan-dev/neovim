@@ -1,5 +1,4 @@
 -- Customize the line at the bottom of Neovim
-
 local utils = require("pygaiwan.lazy.languages.lspconfig.utils")
 
 return {
@@ -85,17 +84,6 @@ return {
 			padding = { right = 1 },
 		})
 
-		insert_left({
-			"filesize",
-			cond = conditions.buffer_not_empty,
-		})
-
-		insert_left({
-			"filename",
-			cond = conditions.buffer_not_empty,
-			color = { fg = colors.blue, gui = "bold" },
-		})
-
 		insert_left({ "location" })
 
 		insert_left({
@@ -114,16 +102,8 @@ return {
 			},
 		})
 
-		insert_left({
-			"diff",
-		})
-
-		insert_left({
-			"branch",
-			icon = "",
-			color = { fg = colors.blue, gui = "bold" },
-		})
-
+		insert_left({ "diff" })
+		insert_left({ "branch", icon = "", color = { fg = colors.blue, gui = "bold" } })
 		insert_left({
 			function()
 				local ft = vim.bo.filetype
@@ -136,6 +116,14 @@ return {
 			end,
 			icon = " ",
 		})
+
+		insert_left({
+			function()
+				return "▊"
+			end,
+			color = { fg = colors.blue },
+		})
+		insert_left({ "filename", path = 2, icon = " ", color = { fg = colors.blue, gui = "bold" } })
 
 		insert_right({
 			function()
