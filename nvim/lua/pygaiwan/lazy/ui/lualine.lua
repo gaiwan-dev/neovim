@@ -9,13 +9,14 @@ return {
 	config = function()
 		local lualine = require("lualine")
 		local colors = {
-			bg = "#2a2e37",
-			fg = "#d3dae3",
-			yellow = "#f6d6a7",
-			cyan = "#80c8c8",
-			green = "#a3d9a5",
-			blue = "#a3c9f9",
-			red = "#f4a3a3",
+			bg = "#2A2E37",
+			fg = "#D3DAE3",
+			yellow = "#EBCB8B",
+			cyan = "#80C8C8",
+			green = "#A3D9A5",
+			blue = "#81A1C1",
+			red = "#BF616A",
+			teal = "#8FBCBB",
 		}
 
 		local conditions = {
@@ -115,6 +116,7 @@ return {
 				return ""
 			end,
 			icon = " ",
+			color = { fg = colors.teal },
 		})
 
 		insert_left({
@@ -151,7 +153,7 @@ return {
 			end,
 
 			icon = " LSP:",
-			color = { gui = "bold" },
+			color = { gui = "bold", fg = colors.yellow },
 		})
 
 		insert_right({
