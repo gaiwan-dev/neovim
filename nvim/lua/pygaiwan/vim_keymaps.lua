@@ -24,7 +24,6 @@ vim.keymap.set("v", "<leader>y", '"+y', { desc = "Save selected lines to compute
 vim.keymap.set("n", "<leader>Y", '"+Y', { desc = "Save current line to computer clipboard" })
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "q", "<nop>")
 
 -- Resize vertical panes
 vim.keymap.set("n", "<A-h>", ":vertical resize -5<CR>", { noremap = true, silent = true })
