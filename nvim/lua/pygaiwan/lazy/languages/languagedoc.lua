@@ -1,6 +1,6 @@
 return {
 	"pygaiwan/nvim-language-doc",
-	branch = "python",
+	branch = "master",
 
 	config = function()
 		local lang_doc = require("nvim-language-doc")
