@@ -1,0 +1,13 @@
+FROM nvim-base:latest
+
+# Setup Neovim config
+RUN git clone https://github.com/gaiwan-dev/neovim.git && \
+    mkdir -p /home/nvimuser/.config/nvim && \
+    cp -r ./neovim/nvim /home/nvimuser/.config/
+
+# Sync plugins and update treesitter
+RUN nvim --headless "+Lazy! sync" +qa && \
+    nvim --headless -c "lua require('nvim-treesitter.install').update({ with_sync = true })" +qa
+
+CMD ["/usr/local/bin/nvim"]
+
