@@ -99,7 +99,7 @@ This repository provides a modular and extensible Neovim configuration using Laz
 
 ## ✨ Adding Support for a New Language
 
-Follow these steps to add support for a new language:
+Follow the steps below to add support for a new language:
 
 1. Add the language to the `ensure_installed` variable in **`languages.treesitter`**.
 2. Add the language in **`languages.lsp`**.
