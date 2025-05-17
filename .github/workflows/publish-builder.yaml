@@ -1,0 +1,28 @@
+on: 
+  workflow_dispatch:
+  push:
+    paths:
+      - 'build/docker/Dockerfile.builder'
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
+      - name: ghcr login
+        uses: docker
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GHCR_USERNAME }}}
+          password: ${{ secrets.GHCR_PASSWORD }}}
+  
+      - name: build image
+        run: |
+            docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/nvim-builder:latest -f build/docker/Dockerfile.nvim-builder .
+
+      - name: push image
+        run: |
+            docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/nvim-builder:latest
