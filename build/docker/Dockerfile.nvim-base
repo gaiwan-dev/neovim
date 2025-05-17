@@ -1,4 +1,4 @@
-FROM nvim-builder AS builder
+FROM ghcr.io/gaiwan-dev/nvim-builder AS builder
 
 ARG NVIM_VERSION=0.11
 
