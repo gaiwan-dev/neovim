@@ -1,6 +1,8 @@
 name: Build and Push Docker base image
 
-on: push
+on: 
+  workflow_dispatch:
+  push:
 
 jobs:
   base:
