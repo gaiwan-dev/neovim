@@ -19,7 +19,7 @@ jobs:
 
       - name: build image
         run: |
-            docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/nvim-base:latest -f Dockerfile.nvim-base .
+            docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/nvim-base:latest -f build/docker/Dockerfile.nvim-base .
 
       - name: push image
         run: |
