@@ -3,7 +3,7 @@ name: Build and Push Docker base image
 on: push
 
 jobs:
-  build-and-push:
+  base:
     runs-on: ubuntu-latest
 
     steps:
