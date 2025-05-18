@@ -27,9 +27,11 @@ RUN apk add --no-cache \
     git \
     build-base\
     npm \
+    cargo \
     && ln -sf /usr/bin/lua5.4 /usr/bin/lua \
     && ln -sf /usr/bin/luarocks-5.4 /usr/bin/luarocks \
-    && luarocks install busted
+    && luarocks install busted \
+    && cargo install stylua
 
 RUN addgroup -S nvimuser && \
     adduser -S -G nvimuser -s /bin/sh -h /home/nvimuser nvimuser && \
