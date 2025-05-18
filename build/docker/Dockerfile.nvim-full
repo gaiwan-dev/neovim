@@ -8,7 +8,9 @@ RUN git clone https://github.com/gaiwan-dev/neovim.git && \
 # Sync plugins and update treesitter
 RUN nvim --headless "+Lazy! sync" +qa && \
     nvim --headless -c "lua require('nvim-treesitter.install').update({ with_sync = true })" +qa && \
-    nvim --headless -c "+MasonUpdate" +qa
+    nvim --headless -c "+MasonUpdate" +qa && \
+    nvim --headless -c "TSInstallSync python" +qa 
+
 
 CMD ["/usr/local/bin/nvim"]
 
