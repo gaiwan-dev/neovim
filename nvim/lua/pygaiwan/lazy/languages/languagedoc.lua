@@ -1,13 +1,13 @@
 return {
 	"pygaiwan/nvim-language-doc",
-	branch = "python",
+	branch = "master",
 
 	config = function()
 		local lang_doc = require("nvim-language-doc")
 		lang_doc.setup({
 			lsp = {
-				ruff = "python3 -m pydoc",
-				pyright = "python3 -m pydoc",
+				ruff = "pydoc",
+				pyright = "pydoc",
 			},
 			window = { position = "right" },
 		})
