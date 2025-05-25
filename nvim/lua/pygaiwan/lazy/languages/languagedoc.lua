@@ -1,5 +1,5 @@
 return {
-	"pygaiwan/nvim-language-doc",
+	"gaiwan-dev/nvim-language-doc",
 	branch = "master",
 
 	config = function()

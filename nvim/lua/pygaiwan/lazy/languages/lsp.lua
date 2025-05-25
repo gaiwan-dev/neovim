@@ -69,6 +69,12 @@ return {
 			},
 		})
 
+		-- this needs to stay here cause is not builtin supported by mason.
+		local lspconfig = require("lspconfig")
+		local yara_config = require("pygaiwan.lazy.languages.lspconfig.configs.yara")
+		yara_config.capabilities = capabilities
+		lspconfig.yls.setup(yara_config)
+
 		-- create the Code group in wk
 		local wk = require("which-key")
 		wk.add({
