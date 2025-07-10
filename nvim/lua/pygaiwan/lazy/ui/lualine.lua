@@ -75,7 +75,7 @@ return {
 
 		insert_left({
 			"progress",
-			color = { fg = colors.fg, gui = "bold" },
+			color = { fg = colors.fg },
 		})
 
 		insert_left({
@@ -89,31 +89,30 @@ return {
 			},
 		})
 
-		insert_left({ "diff" })
-		insert_left({ "branch", icon = "", color = { fg = colors.blue, gui = "bold" } })
+		insert_left({ "branch", icon = "", color = { fg = colors.blue } })
 		insert_left({
 			function()
+				local linter_mapping = {
+					["python"] = { name = "ruff", ext = "toml" },
+					["javascript"] = { name = "biome", ext = "json" },
+					["lua"] = { name = ".stylua", ext = "toml" },
+				}
 				local ft = vim.bo.filetype
-				if ft == "python" then
-					return "Config: " .. utils.get_lint_config_path("ruff", "toml")
-				elseif ft == "javascript" or ft == "typescript" then
-					return "Config: " .. utils.get_lint_config_path("biome", "json")
-				elseif ft == "lua" then
-					return "Config: " .. utils.get_lint_config_path(".stylua", "toml")
+				local linter = linter_mapping[ft]
+				if linter == nil then
+					return ""
 				end
-				return ""
+				local path = utils.get_lint_config_path(linter.name, linter.ext)
+				if path:find(".config/" .. linter.name) then
+					return "Config: Standard"
+				end
+				return "Config: Project"
 			end,
 			icon = " ",
 			color = { fg = colors.teal },
 		})
 
-		insert_left({
-			function()
-				return "▊"
-			end,
-			color = { fg = colors.blue },
-		})
-		insert_left({ "filename", path = 2, icon = " ", color = { fg = colors.blue, gui = "bold" } })
+		insert_left({ "filename", path = 2, icon = " ", color = { fg = colors.blue } })
 
 		insert_right({
 			function()
@@ -141,7 +140,7 @@ return {
 			end,
 
 			icon = " LSP:",
-			color = { gui = "bold", fg = colors.yellow },
+			color = { fg = colors.yellow },
 		})
 
 		insert_right({
