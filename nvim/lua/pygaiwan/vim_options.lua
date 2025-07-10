@@ -2,8 +2,8 @@
 vim.opt.guicursor = ""
 
 vim.opt.nu = true
-vim.opt.relativenumber = true
-vim.o.statuscolumn = "%s %l %=%{v:relnum?v:relnum:v:lnum} "
+-- vim.opt.relativenumber = true
+-- vim.o.statuscolumn = "%s %l %=%{v:relnum?v:relnum:v:lnum} "
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
