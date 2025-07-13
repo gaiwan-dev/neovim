@@ -12,5 +12,5 @@ return {
 			window = { position = "right" },
 		})
 	end,
-	vim.keymap.set("n", "<leader>p", "<cmd>ShowDocs<cr>"),
+	-- vim.keymap.set("n", "<leader>p", "<cmd>ShowDocs<cr>"),
 }
