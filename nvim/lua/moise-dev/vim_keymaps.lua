@@ -104,11 +104,9 @@ local function add_malware_citation()
     local line = vim.api.nvim_get_current_line()
     local next_id = next_citation_id(bufnr)
     local ref = string.format(' <Ref id="%d"/>', next_id)
-    local access_date = vim.fn.strftime("%b %d %Y")
     local citation = string.format(
-        '<Cit id="%d" pageName="Microsoft" articleName="function" url="" lastAccessDate="%s" />',
-        next_id,
-        access_date
+        '<Cit id="%d" pageName="Microsoft" articleName="function" url="" />',
+        next_id
     )
     local insert_col = #line == 0 and 0 or math.min(col + 1, #line)
 
@@ -143,7 +141,7 @@ vim.keymap.set(
 vim.keymap.set(
     "n",
     "<leader>mm",
-    'i<Cit id="" pageName="Microsoft" articleName="function" url="" lastAccessDate="xxx xx 2026" /> <Esc>',
+    'i<Cit id="" pageName="Microsoft" articleName="function" url="" /> <Esc>',
     { noremap = true, silent = true, desc = "Astro Cit Microsoft" }
 )
 
